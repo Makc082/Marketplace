@@ -3,13 +3,13 @@
 #include <string>
 using namespace std;
 
-// очищення вводу 
+// РѕС‡РёС‰РµРЅРЅСЏ РІРІРѕРґСѓ 
 void ClearInput() {
-    cin.clear(); // скидаємо помилки вводу
-	while (cin.get() != '\n'); // чистемо буфер вводу
+    cin.clear(); // СЃРєРёРґР°С”РјРѕ РїРѕРјРёР»РєРё РІРІРѕРґСѓ
+	while (cin.get() != '\n'); // С‡РёСЃС‚РµРјРѕ Р±СѓС„РµСЂ РІРІРѕРґСѓ
 }
 
-// виділення пам’яті для користувачів 
+// РІРёРґС–Р»РµРЅРЅСЏ РїР°РјвЂ™СЏС‚С– РґР»СЏ РєРѕСЂРёСЃС‚СѓРІР°С‡С–РІ 
 void AllocateUserArray(User*& users, int size) {
     if (size > 0 && size < 1000000) {
         users = new User[size];
@@ -19,7 +19,7 @@ void AllocateUserArray(User*& users, int size) {
     }
 }
 
-// подвоюємо масив користувачив
+// РїРѕРґРІРѕСЋС”РјРѕ РјР°СЃРёРІ РєРѕСЂРёСЃС‚СѓРІР°С‡С–РІ 
 void ExpandUserArray(User*& users, int& oldSize, int& size) {
     int newSize = size * 2;
     User* newUsers = new User[newSize];
@@ -33,7 +33,7 @@ void ExpandUserArray(User*& users, int& oldSize, int& size) {
     size = newSize;
 
 }
-// виділення пам’яті для товарів 
+// РІРёРґС–Р»РµРЅРЅСЏ РїР°РјвЂ™СЏС‚С– РґР»СЏ С‚РѕРІР°СЂС–РІ 
 void AllocateProductArray(Product*& products, int size) {
     if (size > 0 && size < 1000000) {
         products = new Product[size];
@@ -43,7 +43,7 @@ void AllocateProductArray(Product*& products, int size) {
     }
 }
 
-// подвоюємо масив продуктів
+// РїРѕРґРІРѕСЋС”РјРѕ РјР°СЃРёРІ РїСЂРѕРґСѓРєС‚С–РІ
 void ExpandProductArray(Product*& products, int& oldSize, int& size) {
     int newSize = size * 2;
     Product* newProducts = new Product[newSize];
@@ -55,7 +55,7 @@ void ExpandProductArray(Product*& products, int& oldSize, int& size) {
     size = newSize;
 }
 
-// реєстрація покупця 
+// СЂРµС”СЃС‚СЂР°С†С–СЏ РїРѕРєСѓРїС†СЏ 
 void RegisterBuyer(SystemState& state) {
     
 	if (state.userCount >= state.maxUsers) {
@@ -63,73 +63,73 @@ void RegisterBuyer(SystemState& state) {
 	}
 
     string username, password;
-    cout << "\nЛогін: ";
+    cout << "\nР›РѕРіС–РЅ: ";
     cin >> username;
-    cout << "Пароль: ";
+    cout << "РџР°СЂРѕР»СЊ: ";
     cin >> password;
 
-	state.users[state.userCount++] = { username, password }; // додаємо нового користувача
-    cout << "\n** Реєстрація успішна! **\n";
+	state.users[state.userCount++] = { username, password }; // РґРѕРґР°С”РјРѕ РЅРѕРІРѕРіРѕ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°
+    cout << "\n** Р РµС”СЃС‚СЂР°С†С–СЏ СѓСЃРїС–С€РЅР°! **\n";
 }
 
-// вхід покупця
+// РІС…С–Рґ РїРѕРєСѓРїС†СЏ
 int LoginBuyer(SystemState& state) {
     string username, password;
-    cout << "\nЛогін: ";
+    cout << "\nР›РѕРіС–РЅ: ";
     cin >> username;
-    cout << "Пароль: ";
+    cout << "РџР°СЂРѕР»СЊ: ";
     cin >> password;
 
     for (int i = 0; i < state.userCount; ++i) {
         if (state.users[i].username == username && state.users[i].password == password) {
-            cout << "\n** Вхід успішний! **\n";
+            cout << "\n** Р’С…С–Рґ СѓСЃРїС–С€РЅРёР№! **\n";
             return i;
         }
     }
 
-    cout << "\nНевірні дані.\n";
+    cout << "\nРќРµРІС–СЂРЅС– РґР°РЅС–.\n";
     return -1;
 }
 
-// вхід продавця 
+// РІС…С–Рґ РїСЂРѕРґР°РІС†СЏ 
 bool LoginSeller() {
     string username, password;
-    cout << "\nПродавець - логін: ";
+    cout << "\nРџСЂРѕРґР°РІРµС†СЊ - Р»РѕРіС–РЅ: ";
     cin >> username;
-    cout << "Пароль: ";
+    cout << "РџР°СЂРѕР»СЊ: ";
     cin >> password;
 
     return (username == "seller" && password == "1234");
 }
 
-// початкове наповнення товарами 
+// РїРѕС‡Р°С‚РєРѕРІРµ РЅР°РїРѕРІРЅРµРЅРЅСЏ С‚РѕРІР°СЂР°РјРё 
 void InitProducts(SystemState& state) {
-    state.products[0] = { 0, "Акумуляторний дриль-шурупокрут Makita", 10455.0, 1, 10 };
-    state.products[1] = { 1, "Акумуляторна кутова шліфмашина MAKITA", 6399.0, 2, 8 };
-    state.products[2] = { 2, "Акумуляторний лобзик MAKITA", 10590.5, 1, 5 };
-    state.products[3] = { 3, "Акумуляторний перфоратор Makita", 5952.0, 3, 3 };
-    state.products[4] = { 4, "Штроборіз MAKITA", 22733.0, 2, 4 };
+    state.products[0] = { 0, "РђРєСѓРјСѓР»СЏС‚РѕСЂРЅРёР№ РґСЂРёР»СЊ-С€СѓСЂСѓРїРѕРєСЂСѓС‚ Makita", 10455.0, 1, 10 };
+    state.products[1] = { 1, "РђРєСѓРјСѓР»СЏС‚РѕСЂРЅР° РєСѓС‚РѕРІР° С€Р»С–С„РјР°С€РёРЅР° MAKITA", 6399.0, 2, 8 };
+    state.products[2] = { 2, "РђРєСѓРјСѓР»СЏС‚РѕСЂРЅРёР№ Р»РѕР±Р·РёРє MAKITA", 10590.5, 1, 5 };
+    state.products[3] = { 3, "РђРєСѓРјСѓР»СЏС‚РѕСЂРЅРёР№ РїРµСЂС„РѕСЂР°С‚РѕСЂ Makita", 5952.0, 3, 3 };
+    state.products[4] = { 4, "РЁС‚СЂРѕР±РѕСЂС–Р· MAKITA", 22733.0, 2, 4 };
     state.productCount = 5;
 }
 
-// додавання нового товару
+// РґРѕРґР°РІР°РЅРЅСЏ РЅРѕРІРѕРіРѕ С‚РѕРІР°СЂСѓ
 void AddProduct(SystemState& state) {
 	if (state.productCount >= state.maxProducts) {
 		ExpandProductArray(state.products, state.productCount, state.maxProducts);
 	}
 
-	cin.ignore(); // очищуємо буфер вводу
+	cin.ignore(); // РѕС‡РёС‰СѓС”РјРѕ Р±СѓС„РµСЂ РІРІРѕРґСѓ
     string name;
     double price;
 
-    cout << "Назва товару: ";
-	getline(cin, name); // зчитуємо назву товару
+    cout << "РќР°Р·РІР° С‚РѕРІР°СЂСѓ: ";
+	getline(cin, name); // Р·С‡РёС‚СѓС”РјРѕ РЅР°Р·РІСѓ С‚РѕРІР°СЂСѓ
 
-    cout << "Ціна: ";
+    cout << "Р¦С–РЅР°: ";
     cin >> price;
 
 	int quantity;
-	cout << "Кількість: ";
+	cout << "РљС–Р»СЊРєС–СЃС‚СЊ: ";
 	cin >> quantity;
     ClearInput();
 
@@ -138,60 +138,60 @@ void AddProduct(SystemState& state) {
     };
     state.productCount++;
 
-    cout << "\n** Товар додано успішно! **\n";
+    cout << "\n** РўРѕРІР°СЂ РґРѕРґР°РЅРѕ СѓСЃРїС–С€РЅРѕ! **\n";
 }
 
-// перегляд усіх товарів
+// РїРµСЂРµРіР»СЏРґ СѓСЃС–С… С‚РѕРІР°СЂС–РІ
 void ViewProducts(const SystemState& state) {
     if (state.productCount == 0) {
-        cout << "Немає товарів.\n";
+        cout << "РќРµРјР°С” С‚РѕРІР°СЂС–РІ.\n";
         return;
     }
 
-    cout << "\n--- Список товарів ---\n";
+    cout << "\n--- РЎРїРёСЃРѕРє С‚РѕРІР°СЂС–РІ ---\n";
     for (int i = 0; i < state.productCount; ++i) {
         const Product& p = state.products[i];
-        cout << i + 1 << ". " << p.name << " - " << p.price << " грн (Кількість: " << p.quantity << ")\n";
+        cout << i + 1 << ". " << p.name << " - " << p.price << " РіСЂРЅ (РљС–Р»СЊРєС–СЃС‚СЊ: " << p.quantity << ")\n";
     }
 }
 
-// додаємо товар до кошика 
+// РґРѕРґР°С”РјРѕ С‚РѕРІР°СЂ РґРѕ РєРѕС€РёРєР° 
 void AddToCart(const SystemState& state, int* cart, int& cartSize) {
 
 	if (cartSize >= 5) {
-		cout << "Кошик переповнений.\n";
+		cout << "РљРѕС€РёРє РїРµСЂРµРїРѕРІРЅРµРЅРёР№.\n";
 		return;
 	}
     
     ViewProducts(state); 
 
     int index;
-    cout << "Введіть номер товару: ";
+    cout << "Р’РІРµРґС–С‚СЊ РЅРѕРјРµСЂ С‚РѕРІР°СЂСѓ: ";
     cin >> index;
-	ClearInput(); // очищуємо буфер вводу
+	ClearInput(); // РѕС‡РёС‰СѓС”РјРѕ Р±СѓС„РµСЂ РІРІРѕРґСѓ
 
     if (index < 1 || index > state.productCount) {
-        cout << "Невірний номер товару.\n";
+        cout << "РќРµРІС–СЂРЅРёР№ РЅРѕРјРµСЂ С‚РѕРІР°СЂСѓ.\n";
         return;
     }
 
     cart[cartSize++] = index - 1;
-    cout << "Товар додано до кошика.\n";
+    cout << "РўРѕРІР°СЂ РґРѕРґР°РЅРѕ РґРѕ РєРѕС€РёРєР°.\n";
 }
 
-// перегляд кошика 
+// РїРµСЂРµРіР»СЏРґ РєРѕС€РёРєР° 
 void ViewCart(const SystemState& state, const int* cart, int cartSize) {
     if (cartSize == 0) {
-        cout << "Кошик порожній.\n";
+        cout << "РљРѕС€РёРє РїРѕСЂРѕР¶РЅС–Р№.\n";
         return;
     }
 
-	double total = 0; // загальна сума
-    cout << "\n--- Ваш кошик ---\n";
+	double total = 0; // Р·Р°РіР°Р»СЊРЅР° СЃСѓРјР°
+    cout << "\n--- Р’Р°С€ РєРѕС€РёРє ---\n";
     for (int i = 0; i < cartSize; ++i) {
-		Product p = state.products[cart[i]]; // отримуємо товар за індексом
-        cout << i + 1 << ". " << p.name << " - " << p.price << " грн\n";
+		Product p = state.products[cart[i]]; // РѕС‚СЂРёРјСѓС”РјРѕ С‚РѕРІР°СЂ Р·Р° С–РЅРґРµРєСЃРѕРј
+        cout << i + 1 << ". " << p.name << " - " << p.price << " РіСЂРЅ\n";
         total += p.price;
     }
-    cout << "Загальна сума: " << total << " грн\n";
+    cout << "Р—Р°РіР°Р»СЊРЅР° СЃСѓРјР°: " << total << " РіСЂРЅ\n";
 }
