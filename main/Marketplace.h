@@ -1,13 +1,13 @@
 #pragma once
 #include <string>
 
-// структура користувача 
+// СЃС‚СЂСѓРєС‚СѓСЂР° РєРѕСЂРёСЃС‚СѓРІР°С‡Р° 
 struct User {
     std::string username;
     std::string password;
 };
 
-// структура товару 
+// СЃС‚СЂСѓРєС‚СѓСЂР° С‚РѕРІР°СЂСѓ 
 struct Product {
     int id = 0;
     std::string name;
@@ -16,7 +16,7 @@ struct Product {
     int quantity = 0;
 };
 
-// структура стану системи 
+// СЃС‚СЂСѓРєС‚СѓСЂР° СЃС‚Р°РЅСѓ СЃРёСЃС‚РµРјРё 
 struct SystemState {
     User* users;
     int userCount;
@@ -27,17 +27,17 @@ struct SystemState {
     int maxProducts;
 };
 
-// прототипи функцій
+// РїСЂРѕС‚РѕС‚РёРїРё С„СѓРЅРєС†С–Р№
 void ClearInput();
-void AllocateUserArray(User*&, int); // виділення пам’яті під масив користувачів
-void ExpandUserArray(User*&, int&, int&); // подвоюємо масив користувачив
-void AllocateProductArray(Product*&, int); // виділяємо пам’ять під масив продуктів
-void ExpandProductArray(Product*&, int&, int&); // подвоюємо масив продуктів
-void RegisterBuyer(SystemState&); // реєстрація покупця
-int LoginBuyer(SystemState&); // вхід покупця
-bool LoginSeller(); // вхід продавця
-void InitProducts(SystemState&); // початкове наповнення товарами
-void AddProduct(SystemState&); // додавання нового товару
-void ViewProducts(const SystemState&); // перегляд усіх товарів
-void AddToCart(const SystemState&, int*, int&); // додаємо товар до кошика
-void ViewCart(const SystemState&, const int*, int); // перегляд кошика
+void AllocateUserArray(User*&, int); // РІРёРґС–Р»РµРЅРЅСЏ РїР°РјвЂ™СЏС‚С– РїС–Рґ РјР°СЃРёРІ РєРѕСЂРёСЃС‚СѓРІР°С‡С–РІ
+void ExpandUserArray(User*&, int&, int&); // РїРѕРґРІРѕСЋС”РјРѕ РјР°СЃРёРІ РєРѕСЂРёСЃС‚СѓРІР°С‡РёРІ
+void AllocateProductArray(Product*&, int); // РІРёРґС–Р»СЏС”РјРѕ РїР°РјвЂ™СЏС‚СЊ РїС–Рґ РјР°СЃРёРІ РїСЂРѕРґСѓРєС‚С–РІ
+void ExpandProductArray(Product*&, int&, int&); // РїРѕРґРІРѕСЋС”РјРѕ РјР°СЃРёРІ РїСЂРѕРґСѓРєС‚С–РІ
+void RegisterBuyer(SystemState&); // СЂРµС”СЃС‚СЂР°С†С–СЏ РїРѕРєСѓРїС†СЏ
+int LoginBuyer(SystemState&); // РІС…С–Рґ РїРѕРєСѓРїС†СЏ
+bool LoginSeller(); // РІС…С–Рґ РїСЂРѕРґР°РІС†СЏ
+void InitProducts(SystemState&); // РїРѕС‡Р°С‚РєРѕРІРµ РЅР°РїРѕРІРЅРµРЅРЅСЏ С‚РѕРІР°СЂР°РјРё
+void AddProduct(SystemState&); // РґРѕРґР°РІР°РЅРЅСЏ РЅРѕРІРѕРіРѕ С‚РѕРІР°СЂСѓ
+void ViewProducts(const SystemState&); // РїРµСЂРµРіР»СЏРґ СѓСЃС–С… С‚РѕРІР°СЂС–РІ
+void AddToCart(const SystemState&, int*, int&); // РґРѕРґР°С”РјРѕ С‚РѕРІР°СЂ РґРѕ РєРѕС€РёРєР°
+void ViewCart(const SystemState&, const int*, int); // РїРµСЂРµРіР»СЏРґ РєРѕС€РёРєР°
